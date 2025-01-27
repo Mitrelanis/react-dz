@@ -19,6 +19,7 @@ body {
 #root{
   justify-content: center;
   display: flex;
+  
 }
 
 code {
@@ -27,15 +28,16 @@ code {
 }
 
 .main{
-  width:70%;
   display: flex;
   flex-wrap: wrap;
+  width: 80%;
+  margin: auto;
 }
 .wrap{
-  width:80%;
   gap: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
   justify-content: center;
 }
+
