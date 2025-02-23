@@ -1,7 +1,12 @@
-import "./index.css";
+import { useCart } from "../../context/CartContext";
+import "./index.css"
 
-export function ProductCard({ data, onAddToCart, cartQuantity, onUpdateCartQuantity }) {
-  const { image, category, title, price } = data;
+export function ProductCard({ data }) {
+  const { cart, addToCart, updateCartQuantity } = useCart();
+  const { image, category, title, price, id } = data;
+
+  const cartItem = cart.find((item) => item.id === id);
+  const cartQuantity = cartItem ? cartItem.quantity : 0;
 
   return (
     <div className="product-card">
@@ -14,12 +19,12 @@ export function ProductCard({ data, onAddToCart, cartQuantity, onUpdateCartQuant
         <div className="price">${price}</div>
         {cartQuantity > 0 ? (
           <div className="quantity-controls">
-            <button onClick={() => onUpdateCartQuantity(data.id, -1)}>-</button>
+            <button onClick={() => updateCartQuantity(id, -1)}>-</button>
             <span>{cartQuantity}</span>
-            <button onClick={() => onUpdateCartQuantity(data.id, 1)}>+</button>
+            <button onClick={() => updateCartQuantity(id, 1)}>+</button>
           </div>
         ) : (
-          <button onClick={onAddToCart}>Add to Cart</button>
+          <button onClick={() => addToCart(data)}>Add to Cart</button>
         )}
       </div>
     </div>
